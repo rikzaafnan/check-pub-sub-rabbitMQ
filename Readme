@@ -1,0 +1,7 @@
+## Pub Sub Architectur
+
+### Tech Stack :
+
+- pub : nodejs express
+- sub : golang fiber
+- message broker : rabbitMQ
