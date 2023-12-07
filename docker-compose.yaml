@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    container_name: rabbitMQ-test
+    image: "rabbitmq:management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+
+  nodejs-publisher:
+    container_name: nodejs-publisher
+    build:
+      context: ./nodejs-publisher
+    ports:
+      - "3000:3000"
+    depends_on:
+      - rabbitmq
+
+  golang-subscriber:
+    container_name: golang-subscriber
+    build:
+      context: ./golang-subscriber
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
